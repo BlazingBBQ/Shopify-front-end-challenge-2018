@@ -1,0 +1,62 @@
+// Externalized Strings
+const externalizedStrings = {
+	headerTitle: "Stay up to date with ecommerce trends with Shopify's newsletter",
+	formSubheader: "Subscribe for free marketing tips",
+	emailPlaceholder: "Email Address",
+	interestPlaceholder: "Interested in...",
+	invalidEmailWarning: "Please enter a valid email address",
+	signUpButtonText: "Sign up now",
+	submittingButtonText: "Submitting...",
+	thanksSubheader: "Thanks for subscribing",
+	thanksContent: "You'll start receiving free tips and resources soon.",
+	interests: [
+		{ name: "Marketing", value: "marketing" },
+		{ name: "Design", value: "design" },
+		{ name: "Business", value: "business" },
+		{ name: "Technology", value: "technology" }
+	]
+};
+/* 
+	Email regular expression
+	[ ] represent optional characters
+	Format: *[.*]@*[-*].*[-*]
+	First portion: Special characters are allowed. Can include periods but not as first or last character.
+	Second and Third portion: Special characters are not allowed. Can include dashes but not as first or last character.
+*/
+const emailPattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?/i;
+
+const myApp = angular.module("myApp", [ ]);
+myApp.controller("ctrl", ($scope) => {
+	$scope.strings = externalizedStrings;
+	$scope.formData = {
+		emailInput: "",
+		invalidEmail: false,
+		interestField: undefined,
+		submitting: false,
+		completed: false
+	};
+	
+	$scope.submit = () => {
+		if (!$scope.formData.submitting) {
+			const emailSubmit = $scope.formData.emailInput;
+			const interestSubmit = $scope.formData.interestField;
+			
+			const validSubmit = emailPattern.test(emailSubmit);
+
+			if (validSubmit) {
+				console.log("Email Field: " + emailSubmit);
+				console.log("Interest Field: " + (interestSubmit ? interestSubmit : "No selection"));
+				$scope.formData.invalidEmail = false;
+				$scope.formData.submitting = true;
+
+				// Simulate HTTP request
+				setTimeout(() => {
+					$scope.formData.completed = true;
+					$scope.$apply();
+				}, 2000);
+			} else {
+				$scope.formData.invalidEmail = true;
+			}
+		}
+	};
+});

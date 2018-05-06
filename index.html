@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Shopify- Front End Challenge - Simon Cousineau</title>
+  
+  
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <body ng-app="myApp">
+	<div class="viewport" ng-controller="ctrl">
+		<div class="header">
+			<div class="header__title" ng-bind="strings.headerTitle"></div>
+			<div class="header__seperator"></div>
+		</div>
+		<div
+			 class="subscribe-form"
+			 ng-class="{'subscribe-form--hidden': formData.completed}">
+			<div class="subscribe-form__subheader" ng-bind="strings.formSubheader"></div>
+			<form ng-submit="submit()">
+				<div class="subscribe-form__input-container">
+					<div class="subscribe-form__email-container">
+						<input
+							class="subscribe-form__email-input"
+							ng-model="formData.emailInput"
+							placeholder="{{strings.emailPlaceholder}}"
+							type="text"></input>
+						<div
+							 class="subscribe-form__invalid-email-warning"
+							 ng-class="{'subscribe-form__invalid-email-warning--shown': formData.invalidEmail}"
+							 ng-bind="strings.invalidEmailWarning"></div>
+					</div>
+					<select class="subscribe-form__interest-field" ng-model="formData.interestField">
+						<option
+							class="subscribe-form__interest-field-option"
+							ng-bind="strings.interestPlaceholder"
+							value=""
+							disabled
+							selected></option>
+						<option
+							class="subscribe-form__interest-field-option"
+							ng-repeat="interest in strings.interests"
+							ng-bind="interest.name"
+							value="{{ interest.value }}"></option>
+					</select>
+				</div>
+				<div class="subscribe-form__submit-button" ng-click="submit()">
+					<div
+						 class="subscribe-form__sign-up-button-text"
+						 ng-class="{'subscribe-form__sign-up-button-text--hidden': formData.submitting}"
+						 ng-bind="strings.signUpButtonText"></div>
+					<div
+						 class="subscribe-form__submitting-button-text"
+						 ng-class="{'subscribe-form__submitting-button-text--shown': formData.submitting}"
+						 ng-bind="strings.submittingButtonText"></div>
+				</div>
+			</form>
+		</div>
+		<div
+			 class="subscribe-complete"
+			 ng-class="{'subscribe-complete--hidden': !formData.completed}">
+			<div class="subscribe-complete__subheader" ng-bind="strings.thanksSubheader"></div>
+			<div class="subscribe-complete__content" ng-bind="strings.thanksContent"></div>
+		</div>
+	</div>
+</body>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

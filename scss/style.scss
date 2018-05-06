@@ -1,0 +1,218 @@
+$fontFaces: Helvetica, sans-serif;
+$fontSizeLarge: 24px;
+$fontSizeReg: 16px;
+$fontSizeSmall: 12px;
+
+$colorWhite: #FFFFFF;
+$colorGreen: #7AB55C;
+$colorGrey: #7B7B7B;
+$colorGreyLight: #CCCCCC;
+$colorPurpleLight: #5C6AC4;
+$colorPurpleDark: #000639;
+$colorRed: #C23628;
+
+$animationSpeed: 0.3s;
+$contentHeight: 160px;
+
+* {
+	outline: none;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: $colorPurpleDark;
+	margin: 0;
+}
+
+.viewport {
+	width: 450px;
+	max-width: 90%;
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	width: 100%;
+	margin-top: 24px;
+	
+	&__title {
+		color: $colorWhite;
+		font: $fontSizeLarge $fontFaces;
+		margin-bottom: 16px;
+	}
+	
+	&__seperator {
+		width: 24px;
+		border-bottom: 2px solid $colorGreen;
+		margin-bottom: 40px;
+	}
+}
+
+.subscribe-form {
+	height: $contentHeight;
+	margin-bottom: 24px;
+	
+	&--hidden {
+		display: none;
+	}
+	
+	&__subheader {
+		color: $colorWhite;
+		font: lighter $fontSizeReg $fontFaces;
+		margin-bottom: 20px;
+	}
+	
+	&__input-container {
+		width: 100%;
+		display: flex;
+		margin-bottom: 8px;
+		
+		// Respond to screen smaller than viewport size
+		@media only screen and (max-width: 450px) {
+			flex-direction: column;
+		}
+	}
+	
+	&__email-container {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 3;
+	}
+	
+	&__email-input {
+		height: 42px;
+		border: none;
+		border-radius: 4px;
+		margin-right: 16px;
+		padding: 0 12px 0 12px;
+		font: lighter $fontSizeReg $fontFaces;
+		background-color: $colorWhite;
+		
+		@media only screen and (max-width: 450px) {
+			margin-right: 0;
+		}
+		
+		&::placeholder {
+			color: $colorGrey;
+		}
+	}
+	
+	&__interest-field {
+		flex-grow: 2;
+		height: 42px;
+		border: none;
+		border-radius: 4px;
+		padding-left: 12px;
+		appearance: none;
+		font: lighter $fontSizeReg $fontFaces;
+		background-color: $colorWhite;
+		
+		background-image:
+			linear-gradient(135deg, $colorGrey 50%, transparent 50%),
+			linear-gradient(45deg, transparent 50%, $colorGrey 50%),
+			linear-gradient(to right, $colorGreyLight, $colorGreyLight);
+		background-position:
+			calc(100% - 9px) 20px,
+			calc(100% - 14px) 20px,
+			calc(100% - 27px) 11px;
+		background-size:
+			5px 5px,
+			5px 5px,
+			1px 20px;
+		background-repeat: no-repeat;
+		
+		@media only screen and (max-width: 160px) {
+			background-image: none;
+		}
+		
+		&.ng-empty {
+			color: $colorGrey;
+		}
+	}
+	
+	&__invalid-email-warning {
+		height: 0;
+		color: $colorRed;
+		font: $fontSizeSmall $fontFaces;
+		overflow: hidden;
+		white-space: nowrap;
+		transition: height $animationSpeed;
+		padding-top: 8px;
+		
+		&--shown {
+			height: 24px;
+		}
+	}
+	
+	&__submit-button {
+		width: 100%;
+		height: 42px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: $colorPurpleLight;
+		border-radius: 4px;
+		margin-top: 8px;
+		font: $fontSizeReg $fontFaces;
+		color: $colorWhite;
+	}
+	
+	&__sign-up-button-text {
+		width: 100%;
+		opacity: 1;
+		transition: width $animationSpeed, opacity $animationSpeed;
+		text-align: center;
+		overflow: hidden;
+		white-space: nowrap;
+		user-select: none;
+		
+		&--hidden {
+			width: 0%;
+			opacity: 0;
+		}
+	}
+	
+	&__submitting-button-text {
+		width: 0%;
+		opacity: 0;
+		transition: width $animationSpeed, opacity $animationSpeed;
+		text-align: center;
+		overflow: hidden;
+		user-select: none;
+		
+		&--shown {
+			width: 100%;
+			opacity: 1;
+		}
+	}
+}
+
+.subscribe-complete {
+	height: $contentHeight;
+	margin-bottom: 24px;
+	
+	&--hidden {
+		display: none;
+	}
+	
+	&__subheader {
+		color: $colorWhite;
+		font: $fontSizeReg $fontFaces;
+		margin-bottom: 16px;
+	}
+	
+	&__content {
+		color: $colorWhite;
+		font: lighter $fontSizeReg $fontFaces;
+	}
+}
